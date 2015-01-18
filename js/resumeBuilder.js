@@ -1,25 +1,115 @@
 
+var bio = {
+  name: "Brandon Carag",
+  role: "Web Developer",
+  contacts: {
+    mobile: "408-571-9893",
+    email: "brandon.carag@gmail.com",
+    github: "https://github.com/brandon-carag",
+    blog: "http://brandoncarag.wordpress.com",
+    location: "San Francisco Bay Area"
+},
+  welcomeMessage: "My name is Brandon and I’m a web developer here in San Francisco. Ping me on Linkedin if you’d like to connect.  I’m always up for a good conversation, opportunity, or learning something new! =)",
+  skills: ["Ruby","Rails","jQuery","HTML","CSS"],
+  biopic: "images/me.jpg"
+  // display: function What goes here?
+};
+
+var education = {
+  schools: [
+  { "name": "University of California, Berkeley",
+    "location": "Berkeley, CA",
+    "degree": "Bachelor's of Science",
+    "major": "Business Administration",
+    "dates": "2007",
+    "url": "http://www.berkeley.edu" },
+  { "name": "University of California, Berkeley Extension",
+    "location": "San Francisco, CA",
+    "degree": "Technical Coursework",
+    "major": "Post-bacclaureate",
+    "dates": "2011",
+    "url": "http://extension.berkeley.edu" }
+  ],
+  onlineCourses: [
+  {  "title": "Web Development (Ruby on Rails)",
+     "school": "Tea Leaf Academy",
+     "date": 2014,
+     "url": "http://www.tealeafacademy.com"}
+     // display: function What goes here?
+  ]
+}
+
 var work = {
   "jobs": [
   {
     "employer": "Learn to Be Foundation",
     "title": "Web Developer",
-    "location": "Anaheim",
-    "dates": "9-14 - Present",
+    "location": "Anaheim, CA",
+    "dates": "September 2014 - Present",
     "description": "Building out the Learn to Be Platform"
   },
   { 
     "employer": "Advent Software",
     "title": "Global Client Services Analyst",
     "location": "San Francisco",
-    "dates": "5-11 - 11/14",
-    "description": "Building out the Learn to Be Platform"
+    "dates": "May 2011 - November 2014",
+    "description": "Troubleshooting"
   }
-]};
+]
+    // why is it display: function
+};
 
+var projects = {
+  projects: [ 
+  { "title": "MyFlix",
+    "dates": "2014 - 2014",
+    "description": "A Netflix clone",
+    "images":["images/myflix.png"] },
+  { "title": "PostIt!",
+    "dates": "2014 - 2014",
+    "description": "A news aggregator",
+    "images":["images/myflix.png"]
+     }
+    ]
+//why display function again?
+  }
 //Build Work History
 
-var displayWork=function(){
+bio.display = function(){
+
+  //TODO: Check whether any contact info provided
+  var formattedHeaderRole = HTMLheaderRole.replace('%data%',bio["role"]) 
+  $("#header").prepend(formattedHeaderRole)
+
+  var formattedHeaderName = HTMLheaderName.replace('%data%',bio["name"])
+  $("#header").prepend(formattedHeaderName)
+
+  for (key in bio.contacts) {
+    var formattedContactGeneric = HTMLcontactGeneric.replace("%contact%",key).replace("%data%",bio.contacts[key])
+    console.log(bio.contacts[key])
+    $("#topContacts").append(formattedContactGeneric)
+  }
+
+  var formattedBioPic = HTMLbioPic.replace("%data%",bio.biopic)
+  $("#header").append(formattedBioPic)
+
+  var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage)
+  $("#header").append(formattedWelcomeMsg)
+
+  if (bio.skills.length != 0) {
+    $("#header").append(HTMLskillsStart);
+    for (skill in bio.skills) {
+      $("#skills").append(HTMLskills.replace("%data%",bio.skills[skill]));
+    }
+
+  }
+}
+
+bio.display()
+
+
+bio.displayWork = function(){
+
   for(job in work.jobs) {
     $("#workExperience").append(HTMLworkStart)
     var formattedWorkEmployer = HTMLworkEmployer.replace("%data%",work.jobs[job].employer)
@@ -32,40 +122,21 @@ var displayWork=function(){
   }
 }
 
-displayWork();
-
-var projects = {
-  projects: [ 
-  { "title": "MyFlix",
-    "dates": "2014",
-    "description": "A Netflix clone" },
-  { "title": "PostIt!",
-    "dates": "2014",
-    "description": "A news aggregator" }
-    ]}
+bio.displayWork();
 
 projects.display = function(){
   for(project in projects.projects) {
     $("#projects").append(HTMLprojectStart)
     formattedProjectTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title)
-    console.log(formattedProjectTitle)
     $(".project-entry:last").append(formattedProjectTitle)
+    formattedProjectDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates)
+    $(".project-entry:last").append(formattedProjectDates)
+    formattedProjectDescription = HTMLprojectDescription.replace("%data%",projects.projects[project].description)
+    $(".project-entry:last").append(formattedProjectDescription)
   }
 }
 
 projects.display()
-
-var bio = {
-  "name": "Brandon Carag",
-  "role": "Web Developer",
-  "welcomeMessage": "Welcome to my portfolio page.",
-  "contacts": {
-    "email": "brandon.carag@gmail.com",
-    "github": "brandon-carag",
-    "location": "Bay Area"
-  },
-  "skills": ["Ruby","Rails"]
-}
 
 var education = {
   schools: [
@@ -73,7 +144,7 @@ var education = {
     "location": "Berkeley, CA",
     "degree": "Bachelor's of Science",
     "major": "Business Administration",
-    "dates": "2005-2007",
+    "dates": "2007",
     "url": "http://www.berkeley.edu" },
   { "name": "University of California, Berkeley Extension",
     "location": "San Francisco, CA",
@@ -83,28 +154,23 @@ var education = {
     "url": "http://extension.berkeley.edu" }
   ],
   onlineCourses: [
-  { "name": "Tea Leaf Academy",
-    "location": "Online",
-    "degree": "Online coursework",
-    "major": "Web Development with Ruby on Rails",
-    "dates": "2014",
-    "url": "http://www.tealeafacademy.com" }
+  {  "title": "Web Development (Ruby on Rails)",
+     "school": "Tea Leaf Academy",
+     "date": 2014,
+     "url": "http://www.tealeafacademy.com"}
+     // display: function What goes here?
   ]
 }
 
-
-if (bio.skills.length != 0) {
-  $("#header").append(HTMLskillsStart);
-  $("#skills").append(HTMLskills.replace("%data%",bio.skills[0]));
-  $("#skills").append(HTMLskills.replace("%data%",bio.skills[1]));
+education.displayEducation = function(){
+  for (school in education.schools){
+  $("#education").append(HTMLschoolStart)
+  formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[school].)
+  }
 }
 
+education.displayEducation();
 
-var formattedName = HTMLheaderName.replace('%data%',"Brandon Carag")
-$("#header").prepend(formattedName)
-
-var formattedRole = HTMLheaderRole.replace('%data%',"Web Developer") 
-$("#main").append(formattedRole)
 
 $("#main").append(internationalizeButton)
 
@@ -118,20 +184,6 @@ var inName=function(string){
   return firstName + lastName
 }
 
-// var bio = {
-//   name: "Brandon Carag",
-//   role: "Web Developer",
-//   contactInfo: {
-//     mobile: "408-571-9893",
-//     email: "brandon.carag@gmail.com",
-//     github: "https://github.com/brandon-carag",
-//     blog: "http://brandoncarag.wordpress.com",
-//     location: "San Francisco Bay Area"
-// },
-//   pictureURL: "images/me.jpg",
-//   welcomeMessage: "Thanks for visiting my portfolio page.",
-//   skills: ["Ruby","Rails","jQuery","HTML","CSS"]
-// };
 
 // var formattedMobile = HTMLmobile.replace('%data%',bio.contactInfo.mobile);
 // $("#topContacts").append(formattedMobile);
