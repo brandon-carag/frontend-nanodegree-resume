@@ -9,7 +9,7 @@ var bio = {
     blog: "http://brandoncarag.wordpress.com",
     location: "San Francisco Bay Area"
 },
-  welcomeMessage: "My name is Brandon and I’m a web developer here in San Francisco. Ping me on Linkedin if you’d like to connect.  I’m always up for a good conversation, opportunity, or learning something new! =)",
+  welcomeMessage: "My name is Brandon and I’m a web developer here in San Francisco.  I’m always up for a good conversation, opportunity, or learning something new--ping me on LI if you'd like to connect!",
   skills: ["Ruby","Rails","javascript","jQuery","HTML","CSS","Bootstrap"],
   biopic: "images/me.jpg"
   // display: function What goes here?
@@ -46,14 +46,14 @@ var work = {
     "title": "Web Developer",
     "location": "Anaheim, CA",
     "dates": "September 2014 - Present",
-    "description": "Building out the Learn to Be Platform"
+    "description": "Stripe API implementation, building out gamification, basic test suite implementation, providing feedback on site design."
   },
   { 
     "employer": "Advent Software",
     "title": "Global Client Services Analyst",
     "location": "San Francisco",
     "dates": "May 2011 - November 2014",
-    "description": "Troubleshooting"
+    "description": "Resolved technical challenges for an enterprise level portfolio management solution. Platform architecture included a web-based interface, IIS, RDBMS back-end, and SSRS reporting."
   }
 ]
     // why is it display: function
@@ -64,11 +64,11 @@ var projects = {
   { "title": "MyFlix",
     "dates": "2014 - 2014",
     "description": "A Netflix clone",
-    "images":["images/myflix.png"] },
+    "images":["images/myflix.png","images/myflix2.png"] },
   { "title": "PostIt!",
     "dates": "2014 - 2014",
     "description": "A news aggregator",
-    "images":["images/myflix.png"]
+    "images":["images/postit.png","images/postit2.png"]
      }
     ]
 //why display function again?
@@ -109,21 +109,6 @@ bio.display = function(){
 
 bio.display()
 
-var projects = {
-  projects: [ 
-  { "title": "MyFlix",
-    "dates": "2014 - 2014",
-    "description": "A Netflix clone",
-    "images":["http://placehold.it/250x350"] },
-  { "title": "PostIt!",
-    "dates": "2014 - 2014",
-    "description": "A news aggregator",
-    "images":["http://placehold.it/250x350"]
-     }
-    ]
-//why display function again?
-  }
-
 bio.displayWork = function(){
 
   for(job in work.jobs) {
@@ -149,8 +134,11 @@ projects.display = function(){
     $(".project-entry:last").append(formattedProjectDates)
     formattedProjectDescription = HTMLprojectDescription.replace("%data%",projects.projects[project].description)
     $(".project-entry:last").append(formattedProjectDescription)
-    formattedProjectImage = HTMLprojectImage.replace("%data%",projects.projects[project].images)
-    $(".project-entry:last").append(formattedProjectImage)
+
+    for (image in projects.projects[project].images) {
+      formattedProjectImage = HTMLprojectImage.replace("%data%",projects.projects[project].images[image])
+      $(".project-entry:last").append(formattedProjectImage)
+    }
   }
 }
 
@@ -180,16 +168,16 @@ education.displayEducation = function(){
 
 education.displayEducation();
 
-var inName=function(string){
-  var newArray = string.split(" ")
-  var firstName = newArray[0][0].toUpperCase + newArray[0].slice(1).toLowerCase
-  var lastName = newArray[1].toUpperCase
-  return firstName + lastName
-}
-
 $("#mapDiv").append(googleMap)
 
 $("#main").append(internationalizeButton)
+// var inName=function(string){
+//   var newArray = string.split(" ")
+//   var firstName = newArray[0][0].toUpperCase + newArray[0].slice(1).toLowerCase
+//   var lastName = newArray[1].toUpperCase
+//   return firstName + lastName
+// }
+
 // var formattedLocation = HTMLlocation.replace('%data%',bio.contactInfo.location);
 // $("#topContacts").append(formattedLocation)
 
