@@ -161,8 +161,11 @@ education.displayEducation = function(){
   for (onlineCourse in education.onlineCourses) {
     $("#education").append(HTMLschoolStart)
     formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title)
-   $(".education-entry:last").append(formattedOnlineTitle)
-
+    $(".education-entry:last").append(formattedOnlineTitle)
+    formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].date)
+    $(".education-entry:last").append(formattedOnlineDates)
+    formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url)
+    $(".education-entry:last").append(formattedOnlineURL)
   }
 }
 
